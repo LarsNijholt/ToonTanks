@@ -14,6 +14,8 @@ class TOONTANKS_API ABasePawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
+	UPROPERTY(EditAnywhere);
+	float speed = 10.f;
 
 protected:
 	// Called when the game starts or when spawned

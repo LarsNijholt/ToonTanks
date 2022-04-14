@@ -14,12 +14,12 @@ class TOONTANKS_API ABasePawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
-	UPROPERTY(EditAnywhere, BlueprintReadWrite);
-	float speed = 10.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float speed = 10.f;
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	void RotateTurret(FVector LookAtTarget);
+	void Fire();
 
 private:
 	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"), Category = "Components")
@@ -30,9 +30,4 @@ private:
 		UStaticMeshComponent* TurretMesh;
 	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"), Category = "Components")
 		USceneComponent* BulletSpawnPoint;
-	
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 };

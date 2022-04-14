@@ -5,6 +5,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SceneComponent.h"
+#include "Projectile.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -36,6 +37,9 @@ void ABasePawn::Fire()
 {
 	if (BulletSpawnPoint)
 	{
-		DrawDebugSphere(GetWorld(), BulletSpawnPoint->GetComponentLocation(), 10.f, 12, FColor::Red, false, 3.f);
+		FRotator Rotation = BulletSpawnPoint->GetComponentRotation();
+		FVector Location = BulletSpawnPoint->GetComponentLocation();
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, Location, Rotation);
+		Projectile->SetOwner(this);
 	}
 }

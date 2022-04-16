@@ -17,6 +17,10 @@ public:
 	ATank();
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	void HandleDestruction();
+	bool IsAlive = true;
+
+	APlayerController* GetTankPlayerController() const { return TankPlayerController; }
 
 protected:
 	// Called when the game starts or when spawned
@@ -35,7 +39,7 @@ private:
 	void Move(float value);
 	void Turn(float value);
 	void GetMouseCursor();
-	APlayerController* PlayerControllerRef;
+	APlayerController* TankPlayerController;
 
 public:
 	// Called every frame

@@ -29,8 +29,18 @@ private:
 		UStaticMeshComponent* BaseMesh;
 	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"), Category = "Components")
 		class UProjectileMovementComponent* ProjectileMovementComp;
-	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"), Category = "Combat")
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"), Category = "Combat")
 		float BaseDamage = 10.f;
 	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+		void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	UPROPERTY(EditAnywhere, Category = "Combat")
+		class UParticleSystem* HitParticles;
+	UPROPERTY(VisibleAnywhere, Category = "Combat")
+		class UParticleSystemComponent* SmokeTrail;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+		class USoundBase* LaunchSound;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+		USoundBase* HitSound;
+	UFUNCTION()
+		void PlaySound(USoundBase* sound);
 };

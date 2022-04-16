@@ -17,6 +17,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float speed = 10.f;
 
+	void HandleDestruction();
+
 protected:
 	void RotateTurret(FVector LookAtTarget);
 	void Fire();
@@ -32,4 +34,8 @@ private:
 		USceneComponent* BulletSpawnPoint;
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 		TSubclassOf<class AProjectile> ProjectileClass;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+		class UParticleSystem* Explosion;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+		class USoundBase* DeathSound;
 };

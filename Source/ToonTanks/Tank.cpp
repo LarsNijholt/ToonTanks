@@ -26,7 +26,7 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponen
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	PlayerControllerRef = Cast<APlayerController>(GetController());
+	TankPlayerController = Cast<APlayerController>(GetController());
 }
 
 // Called every frame
@@ -36,13 +36,20 @@ void ATank::Tick(float DeltaTime)
 	GetMouseCursor();
 }
 
+void ATank::HandleDestruction()
+{
+	Super::HandleDestruction();
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+	IsAlive = false;
+}
+
 void ATank::GetMouseCursor()
 {
-	if (PlayerControllerRef)
+	if (TankPlayerController)
 	{
 		FHitResult HitResult;
-		PlayerControllerRef->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, HitResult);
-		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10.f, 12, FColor::Red, false);
+		TankPlayerController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, HitResult);
 		RotateTurret(HitResult.ImpactPoint);
 	}
 }

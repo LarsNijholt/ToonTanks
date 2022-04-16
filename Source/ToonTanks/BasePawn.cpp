@@ -5,6 +5,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SceneComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Projectile.h"
 
 // Sets default values
@@ -24,6 +25,12 @@ ABasePawn::ABasePawn()
 
 	BulletSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Bullet Spawn"));
 	BulletSpawnPoint->SetupAttachment(TurretMesh);
+}
+
+void ABasePawn::HandleDestruction()
+{
+	if(Explosion)UGameplayStatics::SpawnEmitterAtLocation(this, Explosion, GetActorLocation(), GetActorRotation());
+	UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
 }
 
 void ABasePawn::RotateTurret(FVector LookAtTarget)

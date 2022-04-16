@@ -18,6 +18,11 @@ void ATower::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	RotateToTank();
 }
+void ATower::HandleDestruction()
+{
+	Super::HandleDestruction();
+	Destroy();
+}
 
 void ATower::RotateToTank()
 {
@@ -29,7 +34,7 @@ void ATower::RotateToTank()
 
 void ATower::FireAt()
 {
-	if (InFireRange()) Fire();
+	if (InFireRange() && Tank->IsAlive) Fire();
 }
 
 bool ATower::InFireRange()
